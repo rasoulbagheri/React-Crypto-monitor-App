@@ -1,0 +1,72 @@
+.container {
+  margin-bottom: 50px;
+}
+
+.searchBox {
+  margin-top: 50px;
+  position: relative;
+}
+
+.searchBox input {
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  font-size: 1.1rem;
+  color: white;
+  background-color: #23242e;
+  border: none;
+  border-radius: 5px;
+}
+
+.searchBox input:focus {
+  outline: none;
+}
+.searchBox select {
+  width: 80px;
+  height: 50px;
+  background-color: #23242e;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  border: none;
+}
+.searchBox select:focus {
+  outline: none;
+}
+.searchBox option {
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+.searchResult {
+  position: absolute;
+  text-align: center;
+  top: 60px;
+  width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  background-color: #18181c;
+  border: 2px solid #23242e;
+  padding: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.searchResult li {
+  list-style: none;
+  display: flex;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #22262e;
+  cursor: pointer;
+}
+
+.searchResult li img {
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+}
