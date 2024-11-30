@@ -4,7 +4,7 @@ function Layout({ children }) {
   return (
     <div>
       <header className={styles.header}>
-        <h1>React Crypto monitor APP developed by rasoul bagheri </h1>
+        <h1>React Crypto monitoring APP</h1>
         <p>
           <a href="https://github.com/rasoulbagheri">Github</a>
         </p>
