@@ -6,30 +6,33 @@ import styles from "./TableCoins.module.css";
 import { coinChart } from "../../services/CryptoApi.js";
 
 function TableCoins({ coins, isLoading, currency, setChart }) {
-  const [sortConfig, setSortConfig] = useState({
-    key: "current_price",
-    direction: "ascending",
-  });
+  const [sortConfig, setSortConfig] = useState(null); // Set initial sortConfig to null
 
   const sortedCoins = React.useMemo(() => {
-    let sortableCoins = [...coins];
-    if (sortConfig !== null) {
-      sortableCoins.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
+    if (!sortConfig) {
+      return coins; // Return original coins if no sorting is applied
     }
+
+    let sortableCoins = [...coins];
+    sortableCoins.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? 1 : -1;
+      }
+      return 0;
+    });
     return sortableCoins;
   }, [coins, sortConfig]);
 
   const requestSort = (key) => {
     let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
       direction = "descending";
     }
     setSortConfig({ key, direction });
@@ -63,7 +66,7 @@ function TableCoins({ coins, isLoading, currency, setChart }) {
                   className={styles.sortButton}
                   onClick={() => requestSort("name")}
                 >
-                  {sortConfig.key === "name"
+                  {sortConfig?.key === "name"
                     ? sortConfig.direction === "ascending"
                       ? "↑"
                       : "↓"
@@ -79,7 +82,7 @@ function TableCoins({ coins, isLoading, currency, setChart }) {
                   className={styles.sortButton}
                   onClick={() => requestSort("current_price")}
                 >
-                  {sortConfig.key === "current_price"
+                  {sortConfig?.key === "current_price"
                     ? sortConfig.direction === "ascending"
                       ? "↑"
                       : "↓"
@@ -96,7 +99,7 @@ function TableCoins({ coins, isLoading, currency, setChart }) {
                   className={styles.sortButton}
                   onClick={() => requestSort("total_volume")}
                 >
-                  {sortConfig.key === "total_volume"
+                  {sortConfig?.key === "total_volume"
                     ? sortConfig.direction === "ascending"
                       ? "↑"
                       : "↓"
